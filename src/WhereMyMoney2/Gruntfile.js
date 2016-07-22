@@ -51,14 +51,14 @@
         },
 
         // Watch specified files and define what to do upon file changes
-        watch: {
-            scripts: {
-                files: ['Scripts/**/*.js'],
-                tasks: ['ts', 'uglify', 'copy']
-            }
-        }
+        //watch: {
+        //    scripts: {
+        //        files: ['Scripts/**/*.js'],
+        //        tasks: ['ts', 'uglify', 'copy']
+        //    }
+        //}
     });
 
     // Define the default task so it will launch all other tasks
-    grunt.registerTask('default', ['ts', 'uglify', 'copy', 'watch']);
+    grunt.registerTask('default', ['ts', 'uglify', 'copy']);
 };
