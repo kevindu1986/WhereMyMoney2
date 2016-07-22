@@ -1,0 +1,2 @@
+System.register(["angular2/platform/browser","./app.component","angular2/core"],function(a,b){"use strict";var c,d,e;b&&b.id;return{setters:[function(a){c=a},function(a){d=a},function(a){e=a}],execute:function(){e.enableProdMode(),c.bootstrap(d.AppComponent)}}});
+//# sourceMappingURL=boot.js.map

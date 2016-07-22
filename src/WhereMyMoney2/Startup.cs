@@ -50,8 +50,6 @@ namespace WhereMyMoney2
 
             app.UseStaticFiles();
 
-            app.UseMvc();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

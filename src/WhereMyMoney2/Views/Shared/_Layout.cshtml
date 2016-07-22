@@ -14,9 +14,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Where Is My Money</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker3.css" />
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills -->
+    <script src="~/js/es6-shim.min.js"></script>
+    <script src="~/js/system-polyfills.js"></script>
+
+    <!-- Angular2 libraries -->
+    <script src="~/js/angular2-polyfills.js"></script>
+    <script src="~/js/system.src.js"></script>
+    <script src="~/js/Rx.js"></script>
+    <script src="~/js/angular2.dev.js"></script>
+
+    <!-- Bootstrap via SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                "app": {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('/app/boot')
+            .then(null, console.error.bind(console));
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -68,12 +89,6 @@
         </footer>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/lib/moment/moment.min.js"></script>
-    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
