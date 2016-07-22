@@ -13,9 +13,11 @@ namespace WhereMyMoney2.Models
         public int Id { get; set; }
         public string CurrencyName { get; set; }
         public string CurrencyShortName { get; set; }
+        public int UserID { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
 
         public virtual ICollection<Tbl_Trace> Tbl_Trace { get; set; }
+        public virtual Tbl_User User { get; set; }
     }
 }

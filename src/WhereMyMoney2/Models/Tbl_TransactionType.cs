@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WhereMyMoney.Models
+namespace WhereMyMoney2.Models
 {
-    public class Tbl_TransactionType
+    public partial class Tbl_TransactionType
     {
-        public const string Income = "Income";
-        public const string Outcome = "Outcome";
-        public const string Transfer = "Transfer";
+        public Tbl_TransactionType()
+        {
+            Tbl_Trace = new HashSet<Tbl_Trace>();
+        }
+
+        public int Id { get; set; }
+        public string TransactionTypeName { get; set; }
+        public bool IsIncomeType { get; set; }
+        public int UserID { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+
+        public virtual ICollection<Tbl_Trace> Tbl_Trace { get; set; }
+        public virtual Tbl_User User { get; set; }
     }
 }

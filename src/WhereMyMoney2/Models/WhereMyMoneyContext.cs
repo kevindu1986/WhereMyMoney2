@@ -10,14 +10,13 @@ namespace WhereMyMoney2.Models
         public WhereMyMoneyContext(DbContextOptions<WhereMyMoneyContext> options)
             : base(options)
         { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Tbl_Category>(entity =>
             {
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
-                    .HasColumnType("varchar(50)");
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Description).HasColumnType("ntext");
 
@@ -32,13 +31,19 @@ namespace WhereMyMoney2.Models
             {
                 entity.Property(e => e.CurrencyName)
                     .IsRequired()
-                    .HasColumnType("varchar(50)");
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.CurrencyShortName)
                     .IsRequired()
-                    .HasColumnType("varchar(4)");
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.Description).HasColumnType("ntext");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Tbl_Currency)
+                    .HasForeignKey(d => d.UserID)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Tbl_Currency_Tbl_User");
             });
 
             modelBuilder.Entity<Tbl_Trace>(entity =>
@@ -48,10 +53,6 @@ namespace WhereMyMoney2.Models
                 entity.Property(e => e.Description).HasColumnType("ntext");
 
                 entity.Property(e => e.TraceDate).HasColumnType("date");
-
-                entity.Property(e => e.TransactionType)
-                    .IsRequired()
-                    .HasColumnType("varchar(10)");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Tbl_Trace)
@@ -65,11 +66,32 @@ namespace WhereMyMoney2.Models
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Tbl_Trace_Tbl_Currency");
 
+                entity.HasOne(d => d.TransactionType)
+                    .WithMany(p => p.Tbl_Trace)
+                    .HasForeignKey(d => d.TransactionTypeID)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Tbl_Trace_Tbl_TransactionType");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Tbl_Trace)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Tbl_Trace_Tbl_User");
+            });
+
+            modelBuilder.Entity<Tbl_TransactionType>(entity =>
+            {
+                entity.Property(e => e.Description).HasColumnType("ntext");
+
+                entity.Property(e => e.TransactionTypeName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Tbl_TransactionType)
+                    .HasForeignKey(d => d.UserID)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Tbl_TransactionType_Tbl_User");
             });
 
             modelBuilder.Entity<Tbl_User>(entity =>
@@ -87,6 +109,7 @@ namespace WhereMyMoney2.Models
         public virtual DbSet<Tbl_Category> Tbl_Category { get; set; }
         public virtual DbSet<Tbl_Currency> Tbl_Currency { get; set; }
         public virtual DbSet<Tbl_Trace> Tbl_Trace { get; set; }
+        public virtual DbSet<Tbl_TransactionType> Tbl_TransactionType { get; set; }
         public virtual DbSet<Tbl_User> Tbl_User { get; set; }
     }
 }
