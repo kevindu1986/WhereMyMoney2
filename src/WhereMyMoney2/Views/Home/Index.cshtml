@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WhereMyMoney2.Models.Tbl_Category>
+
+@{
+    ViewData["Title"] = "Category List";
+}
+
+<h2>Category List</h2>
+
+<table class="table">
+    <tr>
+        <th>Category Name</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+    }
+</table>
