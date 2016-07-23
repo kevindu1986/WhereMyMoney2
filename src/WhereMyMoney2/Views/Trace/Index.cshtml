@@ -2,5 +2,12 @@
     ViewData["Title"] = "Category List";
 }
 
-<angularjs2demo>Please wait...</angularjs2demo>
+@section angular_scripts{
+    <script>
+        System.import('/app/trace/trace')
+            .then(null, console.error.bind(console));
+    </script>
+}
+
+<tracelist>Please wait...</tracelist>
 

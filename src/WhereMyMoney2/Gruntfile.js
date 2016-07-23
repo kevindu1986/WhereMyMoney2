@@ -1,6 +1,7 @@
 ﻿module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-ts');
 
@@ -42,13 +43,29 @@
                         'node_modules/angular2/bundles/angular2-polyfills.js',
                         'node_modules/systemjs/dist/system.src.js',
                         'node_modules/rxjs/bundles/Rx.js',
-                        'node_modules/angular2/bundles/angular2.dev.js'
+                        'node_modules/angular2/bundles/angular2.js',
+                        'node_modules/angular2/bundles/http.js',
+                        'node_modules/angular2/bundles/router.js'
                     ],
                     dest: 'wwwroot/js/',
                     filter: 'isFile'
+                },
+                {
+                    cwd: 'Pages/',
+                    src: '**/*.html',
+                    dest: 'wwwroot/pages/',
+                    filter: 'isFile',
+                    expand: true
                 }]
-            }
+            },
         },
+
+        //Clean all file in wwwroot before compiling the scripts
+        clean: {
+            app: "wwwroot/app",
+            js: "wwwroot/js",
+            pages: "wwwroot/pages"
+        }
 
         // Watch specified files and define what to do upon file changes
         //watch: {
@@ -60,5 +77,5 @@
     });
 
     // Define the default task so it will launch all other tasks
-    grunt.registerTask('default', ['ts', 'uglify', 'copy']);
+    grunt.registerTask('default', ['clean', 'ts', 'uglify', 'copy']);
 };

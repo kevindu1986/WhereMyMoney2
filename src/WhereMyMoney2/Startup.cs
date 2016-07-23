@@ -54,7 +54,7 @@ namespace WhereMyMoney2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Trace}/{action=Index}/{id?}");
             });
         }
     }

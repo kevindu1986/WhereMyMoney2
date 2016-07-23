@@ -24,7 +24,9 @@
     <script src="~/js/angular2-polyfills.js"></script>
     <script src="~/js/system.src.js"></script>
     <script src="~/js/Rx.js"></script>
-    <script src="~/js/angular2.dev.js"></script>
+    <script src="~/js/angular2.js"></script>
+    <script src="~/js/http.js"></script>
+    <script src="~/js/router.js"></script>
 
     <!-- Bootstrap via SystemJS -->
     <script>
@@ -35,9 +37,8 @@
                 }
             }
         });
-        System.import('/app/boot')
-            .then(null, console.error.bind(console));
     </script>
+    @RenderSection("angular_scripts", false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
