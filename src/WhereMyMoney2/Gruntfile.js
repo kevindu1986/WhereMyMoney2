@@ -45,7 +45,10 @@
                         'node_modules/rxjs/bundles/Rx.js',
                         'node_modules/angular2/bundles/angular2.js',
                         'node_modules/angular2/bundles/http.js',
-                        'node_modules/angular2/bundles/router.js'
+                        'node_modules/angular2/bundles/router.js',
+                        'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                        'node_modules/bootstrap/dist/js/npm.js',
+                        'node_modules/jquery/jquery.min.js'
                     ],
                     dest: 'wwwroot/js/',
                     filter: 'isFile'
@@ -56,6 +59,30 @@
                     dest: 'wwwroot/pages/',
                     filter: 'isFile',
                     expand: true
+                },
+                {
+                    expand: true,
+                    flatten: true,
+                    src: [
+                        'Pages/css/**/*.css',
+                        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+                        'node_modules/bootstrap/dist/css/bootstrap-theme.css'
+                    ],
+                    dest: 'wwwroot/css/',
+                    filter: 'isFile'
+                },
+                {
+                    expand: true,
+                    flatten: true,
+                    src: [
+                        'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+                        'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+                        'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+                        'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
+                        'node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+                    ],
+                    dest: 'wwwroot/fonts/',
+                    filter: 'isFile'
                 }]
             },
         },
@@ -64,7 +91,9 @@
         clean: {
             app: "wwwroot/app",
             js: "wwwroot/js",
-            pages: "wwwroot/pages"
+            pages: "wwwroot/pages",
+            css: "wwwroot/css",
+            fonts: "wwwroot/fonts"
         }
 
         // Watch specified files and define what to do upon file changes

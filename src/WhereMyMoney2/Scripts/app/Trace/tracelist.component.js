@@ -23,9 +23,13 @@ System.register(['angular2/core', './trace.service'], function(exports_1, contex
         execute: function() {
             TraceListComponent = (function () {
                 function TraceListComponent(traceService) {
+                    var _this = this;
                     this.traceService = traceService;
-                    this.tracelist = traceService.getTraceList();
+                    this.traceService.getTraceList().subscribe(function (data) { return _this.loadTraceList(data); }, function (err) { return console.log(err); });
                 }
+                TraceListComponent.prototype.loadTraceList = function (data) {
+                    this.traceList = data;
+                };
                 TraceListComponent = __decorate([
                     core_1.Component({
                         selector: 'tracelist',

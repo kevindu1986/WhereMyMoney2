@@ -15,7 +15,7 @@ System.register(['angular2/platform/browser', './tracelist.component', 'angular2
                 http_1 = http_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(tracelist_component_1.TraceListComponent, [http_1.Http]);
+            browser_1.bootstrap(tracelist_component_1.TraceListComponent, [http_1.HTTP_PROVIDERS]);
         }
     }
 });

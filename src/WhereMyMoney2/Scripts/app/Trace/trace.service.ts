@@ -8,7 +8,6 @@ export class TraceService {
     }
 
     getTraceList() {
-        alert("OK");
         return this.http.get('http://localhost:2001/Trace/Get').map(res => res.json());
     }
 }

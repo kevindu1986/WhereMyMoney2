@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -19,14 +19,16 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             TraceService = (function () {
                 function TraceService(http) {
                     this.http = http;
                 }
                 TraceService.prototype.getTraceList = function () {
-                    return this.http.get("http://localhost:2001/Trace/Get").map(function (r) { return r.json(); });
+                    alert("OK");
+                    return this.http.get('http://localhost:2001/Trace/Get').map(function (res) { return res.json(); });
                 };
                 TraceService = __decorate([
                     core_1.Injectable(), 
