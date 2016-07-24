@@ -1,16 +1,11 @@
-﻿.navbar{
-    background-color:forestgreen;
+﻿/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
 }
 
-.navbar-nav li a{
-    color:whitesmoke;
-}
-
-.navbar-nav li a:hover{
-    color:black;
-    background-color:forestgreen;
-}
-
-.navbar-header a{
-    color:whitesmoke;
+.table .th-right {
+    text-align:right !important;
 }

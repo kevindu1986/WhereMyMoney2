@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(['angular2/core', './category.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,32 +10,31 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1;
-    var TraceService;
+    var core_1, category_service_1;
+    var CategoryCreateComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
-            function (_1) {}],
+            function (category_service_1_1) {
+                category_service_1 = category_service_1_1;
+            }],
         execute: function() {
-            TraceService = (function () {
-                function TraceService(http) {
-                    this.http = http;
+            CategoryCreateComponent = (function () {
+                function CategoryCreateComponent() {
                 }
-                TraceService.prototype.getTraceList = function () {
-                    return this.http.get('http://localhost:2001/Trace/Get').map(function (res) { return res.json(); });
-                };
-                TraceService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Http])
-                ], TraceService);
-                return TraceService;
+                CategoryCreateComponent = __decorate([
+                    core_1.Component({
+                        selector: 'categorylist',
+                        templateUrl: './pages/category/categorycreate.html',
+                        providers: [category_service_1.CategoryService]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], CategoryCreateComponent);
+                return CategoryCreateComponent;
             }());
-            exports_1("TraceService", TraceService);
+            exports_1("CategoryCreateComponent", CategoryCreateComponent);
         }
     }
 });

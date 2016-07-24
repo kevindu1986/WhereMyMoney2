@@ -10,8 +10,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
     var core_1, http_1;
-    var TraceService;
+    var CategoryService;
     return {
         setters:[
             function (core_1_1) {
@@ -22,20 +25,24 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            TraceService = (function () {
-                function TraceService(http) {
+            CategoryService = (function () {
+                function CategoryService(http, globalHost) {
                     this.http = http;
+                    this.globalHost = globalHost;
+                    this.controller = 'CategoryApi';
+                    this.route = 'api';
                 }
-                TraceService.prototype.getTraceList = function () {
-                    return this.http.get('http://localhost:2001/Trace/Get').map(function (res) { return res.json(); });
+                CategoryService.prototype.getCategoryList = function () {
+                    return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller).map(function (res) { return res.json(); });
                 };
-                TraceService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Http])
-                ], TraceService);
-                return TraceService;
+                CategoryService = __decorate([
+                    core_1.Injectable(),
+                    __param(1, core_1.Inject('globalHost')), 
+                    __metadata('design:paramtypes', [http_1.Http, String])
+                ], CategoryService);
+                return CategoryService;
             }());
-            exports_1("TraceService", TraceService);
+            exports_1("CategoryService", CategoryService);
         }
     }
 });

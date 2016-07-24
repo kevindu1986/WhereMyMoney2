@@ -13,6 +13,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <title>Where Is My Money</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/wheremymoney2.css" />
@@ -42,22 +44,24 @@
                 }
             }
         });
+
+        //Global variable
+        var globalHost = '@(Context.Request.Scheme + "://" + Context.Request.Host)';
     </script>
     @RenderSection("angular_scripts", false)
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                <a asp-controller="Trace" asp-action="Index" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Wellcome @(ViewBag.UserName == null ? "to (Where Is My Money)" : ViewBag.UserName) !</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Trace" asp-action="Index" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Wellcome @(ViewBag.UserName == null ? "to (Where Is My Money)" : ViewBag.UserName) !</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Trace" asp-action="Index">My Money</a></li>
 
@@ -85,7 +89,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; Yumiki Studio 2016 - Where Is My Money v.2.0</p>
+            <p>&copy; Yumiki Studio 2016 - Where Is My Money v.2.0 - Theme by <a href="https://bootswatch.com/darkly/">Bootswatch Darkly</a></p>
         </footer>
     </div>
 

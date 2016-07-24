@@ -11,11 +11,12 @@ using WhereMyMoney2.Models;
 
 namespace WhereMyMoney2.Controllers
 {
-    public class BaseController : Controller
+    [Route("api/[controller]")]
+    public class BaseApiController : Controller
     {
         protected WhereMyMoneyContext _context;
 
-        public BaseController(WhereMyMoneyContext context)
+        public BaseApiController(WhereMyMoneyContext context)
         {
             _context = context;
         }
@@ -43,18 +44,6 @@ namespace WhereMyMoney2.Controllers
         //    {
         //        HttpSession.SetString("SessionObject", JsonConvert.SerializeObject(value));
         //    }
-        //}
-
-        //protected IActionResult RedirectToLogIn()
-        //{
-        //    HttpSession.Clear();
-        //    ViewBag.Session = null;
-        //    return RedirectToAction("LogIn", "User");
-        //}
-
-        //protected IActionResult RedirectToTrace()
-        //{
-        //    return RedirectToAction("Index", "Trace");
         //}
     }
 }

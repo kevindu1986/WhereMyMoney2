@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WhereMyMoney2.Models
 {
@@ -8,6 +9,7 @@ namespace WhereMyMoney2.Models
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
+
         public DateTime TraceDate { get; set; }
         public int UserId { get; set; }
         public int CurrencyId { get; set; }
@@ -58,6 +60,14 @@ namespace WhereMyMoney2.Models
                     return TransactionType.TransactionTypeName;
                 }
                 return string.Empty;
+            }
+        }
+
+        public string FormattedTraceDate
+        {
+            get
+            {
+                return TraceDate.ToString("dd-MMM-yyyy");
             }
         }
     }

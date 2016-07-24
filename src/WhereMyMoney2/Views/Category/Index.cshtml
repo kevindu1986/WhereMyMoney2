@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Categories";
+}
+
+@section angular_scripts{
+    <script>
+        System.import('/app/category/category').then((module) => { module.main(globalHost); }, console.error.bind(console));
+    </script>
+}
+
+<categorylist>Please wait...</categorylist>
+

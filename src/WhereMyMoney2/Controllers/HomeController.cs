@@ -7,15 +7,11 @@ using WhereMyMoney2.Models;
 
 namespace WhereMyMoney2.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
-        public HomeController(WhereMyMoneyContext context) : base(context)
-        {
-        }
-
         public IActionResult Index()
         {
-            return View(_context.Tbl_Category.ToList());
+            return View();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace WhereMyMoney2.Models
@@ -16,7 +17,9 @@ namespace WhereMyMoney2.Models
         public string Description { get; set; }
         public bool IsActive { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Tbl_Trace> Tbl_Trace { get; set; }
+        [JsonIgnore]
         public virtual Tbl_User User { get; set; }
     }
 }
