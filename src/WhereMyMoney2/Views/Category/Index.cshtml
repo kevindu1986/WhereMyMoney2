@@ -4,7 +4,7 @@
 
 @section angular_scripts{
     <script>
-        System.import('/app/category/category').then((module) => { module.main(globalHost); }, console.error.bind(console));
+        System.import('/app/category/category.boot').then((module) => { module.main(globalHost); }, console.error.bind(console));
     </script>
 }
 

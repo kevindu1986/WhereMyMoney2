@@ -35,7 +35,7 @@ System.register(['angular2/core', './category.service', './categorycreate.compon
                 };
                 CategoryListComponent = __decorate([
                     core_1.Component({
-                        selector: 'categorycreate',
+                        selector: 'categorylist',
                         templateUrl: './pages/category/categorylist.html',
                         providers: [category_service_1.CategoryService],
                         directives: [categorycreate_component_1.CategoryCreateComponent]

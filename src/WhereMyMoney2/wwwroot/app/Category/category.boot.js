@@ -1,0 +1,2 @@
+System.register(["angular2/platform/browser","angular2/core","./categorylist.component","angular2/http"],function(a,b){"use strict";function c(a){d.bootstrap(f.CategoryListComponent,[g.HTTP_PROVIDERS,e.provide("globalHost",{useValue:a})])}var d,e,f,g;b&&b.id;return a("main",c),{setters:[function(a){d=a},function(a){e=a},function(a){f=a},function(a){g=a}],execute:function(){}}});
+//# sourceMappingURL=category.boot.js.map

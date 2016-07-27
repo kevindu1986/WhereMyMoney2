@@ -24,17 +24,14 @@ namespace WhereMyMoney2.Controllers
             return categoryList;
         }
 
-        //[HttpPost]
-        //public IActionResult Create([FromBody] Tbl_Category item)
-        //{
-        //    _message = "Created new category successfully!";
-
-        //    return CreatedAtRoute("GetMessage", _message);
-        //}
-
         [HttpPost]
-        public void Create([FromBody] string item)
+        public IEnumerable<Tbl_Category> Create([FromBody] Tbl_Category item)
         {
+            string _message = "Created new category successfully!";
+
+            List<Tbl_Category> categoryList = _context.Tbl_Category.Where(c => c.IsActive).OrderBy(c => c.CategoryName).ToList();
+
+            return categoryList;
         }
     }
 }

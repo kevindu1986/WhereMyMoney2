@@ -1,4 +1,4 @@
-System.register(['angular2/core', './category.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './category.service', './category'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './category.service'], function(exports_1, con
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, category_service_1;
+    var core_1, category_service_1, category_1;
     var CategoryCreateComponent;
     return {
         setters:[
@@ -19,18 +19,34 @@ System.register(['angular2/core', './category.service'], function(exports_1, con
             },
             function (category_service_1_1) {
                 category_service_1 = category_service_1_1;
+            },
+            function (category_1_1) {
+                category_1 = category_1_1;
             }],
         execute: function() {
             CategoryCreateComponent = (function () {
-                function CategoryCreateComponent() {
+                function CategoryCreateComponent(categoryService) {
+                    this.categoryService = categoryService;
+                    this.formTitle = "Create new Category...";
+                    this.category = new category_1.Category();
                 }
+                CategoryCreateComponent.prototype.createNewCategory = function () {
+                    var _this = this;
+                    this.categoryService.createNewCategory(this.category).subscribe(function (data) { return _this.refreshData(data); }, function (err) { return console.log(err); });
+                };
+                CategoryCreateComponent.prototype.refreshData = function (data) {
+                    alert(JSON.stringify(this.category));
+                    this.category.categoryName = "";
+                    this.category.description = "";
+                    //alert(JSON.stringify(this.category));
+                };
                 CategoryCreateComponent = __decorate([
                     core_1.Component({
-                        selector: 'categorylist',
+                        selector: 'categorycreate',
                         templateUrl: './pages/category/categorycreate.html',
                         providers: [category_service_1.CategoryService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [category_service_1.CategoryService])
                 ], CategoryCreateComponent);
                 return CategoryCreateComponent;
             }());

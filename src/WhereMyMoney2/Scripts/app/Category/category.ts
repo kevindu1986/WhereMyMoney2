@@ -1,14 +1,15 @@
-﻿///<reference path="../../../node_modules/angular2/typings/browser.d.ts" />
+﻿export class Category {
+    public id: number;
+    public categoryName: string;
+    public description: string;
+    public isActive: boolean;
+    public userId: number;
 
-import {bootstrap} from 'angular2/platform/browser'
-import {provide} from 'angular2/core'
-import {CategoryListComponent} from './categorylist.component'
-import { HTTP_PROVIDERS } from 'angular2/http';
-
-export function main(globalHost) {
-    bootstrap(CategoryListComponent, [
-        HTTP_PROVIDERS,
-        provide('globalHost', { useValue: globalHost })
-        //add more 'provide' for more javascript's variables.
-    ]);
+    constructor() {
+        this.id = 0;
+        this.categoryName = "";
+        this.description = "";
+        this.isActive = true;
+        this.userId = 0;
+    }
 }
