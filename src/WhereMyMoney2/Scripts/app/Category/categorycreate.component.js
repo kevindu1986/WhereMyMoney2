@@ -10,6 +10,9 @@ System.register(['angular2/core', './category.service', './category'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
     var core_1, category_service_1, category_1;
     var CategoryCreateComponent;
     return {
@@ -25,28 +28,31 @@ System.register(['angular2/core', './category.service', './category'], function(
             }],
         execute: function() {
             CategoryCreateComponent = (function () {
-                function CategoryCreateComponent(categoryService) {
+                function CategoryCreateComponent(categoryService, elementRef) {
                     this.categoryService = categoryService;
+                    this.elementRef = elementRef;
                     this.formTitle = "Create new Category...";
                     this.category = new category_1.Category();
                 }
+                CategoryCreateComponent.prototype.ngOnInit = function () {
+                };
                 CategoryCreateComponent.prototype.createNewCategory = function () {
                     var _this = this;
                     this.categoryService.createNewCategory(this.category).subscribe(function (data) { return _this.refreshData(data); }, function (err) { return console.log(err); });
                 };
                 CategoryCreateComponent.prototype.refreshData = function (data) {
-                    alert(JSON.stringify(this.category));
                     this.category.categoryName = "";
                     this.category.description = "";
-                    //alert(JSON.stringify(this.category));
+                    $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
                 };
                 CategoryCreateComponent = __decorate([
                     core_1.Component({
                         selector: 'categorycreate',
                         templateUrl: './pages/category/categorycreate.html',
                         providers: [category_service_1.CategoryService]
-                    }), 
-                    __metadata('design:paramtypes', [category_service_1.CategoryService])
+                    }),
+                    __param(1, core_1.Inject(core_1.ElementRef)), 
+                    __metadata('design:paramtypes', [category_service_1.CategoryService, core_1.ElementRef])
                 ], CategoryCreateComponent);
                 return CategoryCreateComponent;
             }());

@@ -1,6 +1,8 @@
-﻿import {Component} from 'angular2/core';
+﻿import {Component, ElementRef, Inject, OnInit} from 'angular2/core';
 import {CategoryService} from './category.service';
 import {Category} from './category';
+
+declare var $: any;
 
 @Component({
     selector: 'categorycreate',
@@ -8,23 +10,25 @@ import {Category} from './category';
     providers: [CategoryService]
 })
 
-export class CategoryCreateComponent {
+export class CategoryCreateComponent implements OnInit {
     public formTitle: string;
     public category: Category;
 
-    constructor(private categoryService: CategoryService) {
+    constructor(private categoryService: CategoryService, @Inject(ElementRef) private elementRef: ElementRef) {
         this.formTitle = "Create new Category...";
         this.category = new Category();
     }   
+
+    ngOnInit() {
+    }
 
     createNewCategory() {
         this.categoryService.createNewCategory(this.category).subscribe(data => this.refreshData(data), err => console.log(err));
     }
 
     refreshData(data) {
-        alert(JSON.stringify(this.category));
         this.category.categoryName = "";
         this.category.description = "";
-        //alert(JSON.stringify(this.category));
+        $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
     }
 }

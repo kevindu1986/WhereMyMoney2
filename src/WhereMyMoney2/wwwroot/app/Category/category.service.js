@@ -1,2 +1,55 @@
-System.register(["angular2/core","angular2/http","rxjs/add/operator/map"],function(a,b){"use strict";var c,d,e,f=(b&&b.id,this&&this.__decorate||function(a,b,c,d){var e,f=arguments.length,g=f<3?b:null===d?d=Object.getOwnPropertyDescriptor(b,c):d;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)g=Reflect.decorate(a,b,c,d);else for(var h=a.length-1;h>=0;h--)(e=a[h])&&(g=(f<3?e(g):f>3?e(b,c,g):e(b,c))||g);return f>3&&g&&Object.defineProperty(b,c,g),g}),g=this&&this.__metadata||function(a,b){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(a,b)},h=this&&this.__param||function(a,b){return function(c,d){b(c,d,a)}};return{setters:[function(a){c=a},function(a){d=a},function(a){}],execute:function(){e=function(){function a(a,b){this.http=a,this.globalHost=b,this.controller="CategoryApi",this.route="api"}return a.prototype.getCategoryList=function(){return this.http.get(this.globalHost+"/"+this.route+"/"+this.controller).map(function(a){return a.json()})},a.prototype.createNewCategory=function(a){var b=JSON.stringify(a),c=new d.Headers;return c.append("Content-Type","application/json"),this.http.post(this.globalHost+"/"+this.route+"/"+this.controller,b,{headers:c}).map(function(a){return a.json()})},a=f([c.Injectable(),h(1,c.Inject("globalHost")),g("design:paramtypes",[d.Http,String])],a)}(),a("CategoryService",e)}}});
+System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+    var core_1, http_1;
+    var CategoryService;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (_1) {}],
+        execute: function() {
+            CategoryService = (function () {
+                function CategoryService(http, globalHost) {
+                    this.http = http;
+                    this.globalHost = globalHost;
+                    this.controller = 'CategoryApi';
+                    this.route = 'api';
+                }
+                CategoryService.prototype.getCategoryList = function () {
+                    return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller).map(function (res) { return res.json(); });
+                };
+                CategoryService.prototype.createNewCategory = function (category) {
+                    var body = JSON.stringify(category);
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    return this.http.post(this.globalHost + '/' + this.route + '/' + this.controller, body, { headers: headers }).map(function (res) { return res.json(); });
+                };
+                CategoryService = __decorate([
+                    core_1.Injectable(),
+                    __param(1, core_1.Inject('globalHost')), 
+                    __metadata('design:paramtypes', [http_1.Http, String])
+                ], CategoryService);
+                return CategoryService;
+            }());
+            exports_1("CategoryService", CategoryService);
+        }
+    }
+});
 //# sourceMappingURL=category.service.js.map

@@ -105,5 +105,5 @@
     });
 
     // Define the default task so it will launch all other tasks
-    grunt.registerTask('default', ['clean', 'ts', 'uglify', 'copy']);
+    grunt.registerTask('default', ['clean', 'ts', 'copy']); //, 'uglify'
 };

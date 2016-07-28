@@ -1,2 +1,51 @@
-System.register(["angular2/core","./category.service","./categorycreate.component"],function(a,b){"use strict";var c,d,e,f,g=(b&&b.id,this&&this.__decorate||function(a,b,c,d){var e,f=arguments.length,g=f<3?b:null===d?d=Object.getOwnPropertyDescriptor(b,c):d;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)g=Reflect.decorate(a,b,c,d);else for(var h=a.length-1;h>=0;h--)(e=a[h])&&(g=(f<3?e(g):f>3?e(b,c,g):e(b,c))||g);return f>3&&g&&Object.defineProperty(b,c,g),g}),h=this&&this.__metadata||function(a,b){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(a,b)};return{setters:[function(a){c=a},function(a){d=a},function(a){e=a}],execute:function(){f=function(){function a(a){var b=this;this.categoryService=a,this.categoryService.getCategoryList().subscribe(function(a){return b.loadTraceList(a)},function(a){return console.log(a)})}return a.prototype.loadTraceList=function(a){this.categoryList=a},a=g([c.Component({selector:"categorylist",templateUrl:"./pages/category/categorylist.html",providers:[d.CategoryService],directives:[e.CategoryCreateComponent]}),h("design:paramtypes",[d.CategoryService])],a)}(),a("CategoryListComponent",f)}}});
+System.register(['angular2/core', './category.service', './categorycreate.component'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1, category_service_1, categorycreate_component_1;
+    var CategoryListComponent;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (category_service_1_1) {
+                category_service_1 = category_service_1_1;
+            },
+            function (categorycreate_component_1_1) {
+                categorycreate_component_1 = categorycreate_component_1_1;
+            }],
+        execute: function() {
+            CategoryListComponent = (function () {
+                function CategoryListComponent(categoryService) {
+                    var _this = this;
+                    this.categoryService = categoryService;
+                    this.categoryService.getCategoryList().subscribe(function (data) { return _this.loadTraceList(data); }, function (err) { return console.log(err); });
+                }
+                CategoryListComponent.prototype.loadTraceList = function (data) {
+                    this.categoryList = data;
+                };
+                CategoryListComponent = __decorate([
+                    core_1.Component({
+                        selector: 'categorylist',
+                        templateUrl: './pages/category/categorylist.html',
+                        providers: [category_service_1.CategoryService],
+                        directives: [categorycreate_component_1.CategoryCreateComponent]
+                    }), 
+                    __metadata('design:paramtypes', [category_service_1.CategoryService])
+                ], CategoryListComponent);
+                return CategoryListComponent;
+            }());
+            exports_1("CategoryListComponent", CategoryListComponent);
+        }
+    }
+});
 //# sourceMappingURL=categorylist.component.js.map

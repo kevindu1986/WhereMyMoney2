@@ -27,10 +27,25 @@ namespace WhereMyMoney2.Controllers
         [HttpPost]
         public IEnumerable<Tbl_Category> Create([FromBody] Tbl_Category item)
         {
-            string _message = "Created new category successfully!";
+            item.IsActive = true;
+            item.UserID = 1;
+            _context.Tbl_Category.Add(item);
+            _context.SaveChanges();
 
             List<Tbl_Category> categoryList = _context.Tbl_Category.Where(c => c.IsActive).OrderBy(c => c.CategoryName).ToList();
+            return categoryList;
+        }
 
+        [HttpPut]
+        public IEnumerable<Tbl_Category> Update(int id, [FromBody] Tbl_Category item)
+        {
+            Tbl_Category dbItem = _context.Tbl_Category.Where(c => c.Id == id).FirstOrDefault();
+            dbItem.CategoryName = item.CategoryName;
+            dbItem.Description = item.Description;
+            _context.Tbl_Category.Add(item);
+            _context.SaveChanges();
+
+            List<Tbl_Category> categoryList = _context.Tbl_Category.Where(c => c.IsActive).OrderBy(c => c.CategoryName).ToList();
             return categoryList;
         }
     }
