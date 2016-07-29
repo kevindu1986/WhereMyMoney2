@@ -1,4 +1,4 @@
-System.register(['angular2/core', './category.service', './category'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './category.service', './category'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,12 +13,15 @@ System.register(['angular2/core', './category.service', './category'], function(
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, category_service_1, category_1;
+    var core_1, common_1, category_service_1, category_1;
     var CategoryCreateComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             },
             function (category_service_1_1) {
                 category_service_1 = category_service_1_1;
@@ -28,11 +31,17 @@ System.register(['angular2/core', './category.service', './category'], function(
             }],
         execute: function() {
             CategoryCreateComponent = (function () {
-                function CategoryCreateComponent(categoryService, elementRef) {
+                function CategoryCreateComponent(categoryService, elementRef, builder) {
                     this.categoryService = categoryService;
                     this.elementRef = elementRef;
-                    this.formTitle = "Create new Category...";
+                    this.builder = builder;
+                    this.submitAttempt = false;
+                    this.formTitle = 'Create new Category...';
                     this.category = new category_1.Category();
+                    this.categoryNameInput = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required]));
+                    this.categoryForm = builder.group({
+                        categoryNameInput: this.categoryNameInput
+                    });
                 }
                 CategoryCreateComponent.prototype.ngOnInit = function () {
                 };
@@ -41,9 +50,14 @@ System.register(['angular2/core', './category.service', './category'], function(
                     this.categoryService.createNewCategory(this.category).subscribe(function (data) { return _this.refreshData(data); }, function (err) { return console.log(err); });
                 };
                 CategoryCreateComponent.prototype.refreshData = function (data) {
-                    this.category.categoryName = "";
-                    this.category.description = "";
-                    $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
+                    if (this.categoryForm.valid == false) {
+                        alert('Enter required fields!!');
+                    }
+                    else {
+                        this.category.categoryName = "";
+                        this.category.description = "";
+                        $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
+                    }
                 };
                 CategoryCreateComponent = __decorate([
                     core_1.Component({
@@ -52,7 +66,7 @@ System.register(['angular2/core', './category.service', './category'], function(
                         providers: [category_service_1.CategoryService]
                     }),
                     __param(1, core_1.Inject(core_1.ElementRef)), 
-                    __metadata('design:paramtypes', [category_service_1.CategoryService, core_1.ElementRef])
+                    __metadata('design:paramtypes', [category_service_1.CategoryService, core_1.ElementRef, common_1.FormBuilder])
                 ], CategoryCreateComponent);
                 return CategoryCreateComponent;
             }());

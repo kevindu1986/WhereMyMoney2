@@ -5,7 +5,7 @@
         <tr>
             <th>Category Name</th>
             <th>Description</th>
-            <th><a href="#" data-toggle="modal" data-target="#categorycreate">New Category</a></th>
+            <th><a href="#" (click)="create()" data-toggle="modal" data-target="#categorycreate">New Category</a></th>
         </tr>
     </thead>
     <tbody>
@@ -18,5 +18,5 @@
         </tr>
     </tbody>
 </table>
-
+<loadingdialog></loadingdialog>
 <categorycreate></categorycreate>

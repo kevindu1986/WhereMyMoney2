@@ -7,26 +7,28 @@
                 <h4 class="modal-title">{{formTitle}}</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
+                <form [ngFormModel]="categoryForm" class="form-horizontal" role="form">
+                    <div class="form-group" [ngClass]="{ 'has-error': !validForm }">
                         <label class="col-lg-3 control-label">Category Name</label>
                         <div class="col-lg-9">
-                            <input type="text" [(ngModel)]="category.categoryName" required class="form-control" placeholder="Enter Category Name..."/>
+                            <input type="text" [(ngModel)]="category.categoryName" ngControl="categoryNameInput" class="form-control" placeholder="Enter Category Name..." />
+                            <control-messages [control]="categoryForm.controls.categoryNameInput"></control-messages>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Description</label>
                         <div class="col-lg-9">
-                            <textarea  [(ngModel)]="category.description" required class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                            <textarea [(ngModel)]="category.description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button (click)="createNewCategory();" type="button" class="btn btn-primary">Create</button>
+                <button (click)="save();" type="button" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+<loadingdialog></loadingdialog>
