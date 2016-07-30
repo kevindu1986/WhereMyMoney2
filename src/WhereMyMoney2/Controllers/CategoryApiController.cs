@@ -24,6 +24,15 @@ namespace WhereMyMoney2.Controllers
             return categoryList;
         }
 
+        // GET api/values/1
+        [HttpGet("{id}")]
+        public Tbl_Category GetById(int id)
+        {
+            Tbl_Category category = _context.Tbl_Category.Where(c => c.Id == id).FirstOrDefault();
+
+            return category;
+        }
+
         [HttpPost]
         public IEnumerable<Tbl_Category> Create([FromBody] Tbl_Category item)
         {
@@ -36,13 +45,12 @@ namespace WhereMyMoney2.Controllers
             return categoryList;
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IEnumerable<Tbl_Category> Update(int id, [FromBody] Tbl_Category item)
         {
             Tbl_Category dbItem = _context.Tbl_Category.Where(c => c.Id == id).FirstOrDefault();
             dbItem.CategoryName = item.CategoryName;
             dbItem.Description = item.Description;
-            _context.Tbl_Category.Add(item);
             _context.SaveChanges();
 
             List<Tbl_Category> categoryList = _context.Tbl_Category.Where(c => c.IsActive).OrderBy(c => c.CategoryName).ToList();

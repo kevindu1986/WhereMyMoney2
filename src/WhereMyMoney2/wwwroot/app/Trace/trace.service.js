@@ -29,6 +29,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 TraceService.prototype.getTraceList = function () {
                     return this.http.get('http://localhost:2001/Trace/Get').map(function (res) { return res.json(); });
                 };
+                TraceService.prototype.getTraceById = function (id) {
+                };
                 TraceService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

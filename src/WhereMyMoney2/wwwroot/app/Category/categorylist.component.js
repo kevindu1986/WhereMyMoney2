@@ -1,4 +1,4 @@
-System.register(['angular2/core', './category.service', './categorycreate.component', '../Commons/loadingdialog.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './category.service', './categorymodal.component', '../Commons/loadingdialog.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './category.service', './categorycreate.compon
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, category_service_1, categorycreate_component_1, loadingdialog_component_1;
+    var core_1, category_service_1, categorymodal_component_1, loadingdialog_component_1;
     var CategoryListComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(['angular2/core', './category.service', './categorycreate.compon
             function (category_service_1_1) {
                 category_service_1 = category_service_1_1;
             },
-            function (categorycreate_component_1_1) {
-                categorycreate_component_1 = categorycreate_component_1_1;
+            function (categorymodal_component_1_1) {
+                categorymodal_component_1 = categorymodal_component_1_1;
             },
             function (loadingdialog_component_1_1) {
                 loadingdialog_component_1 = loadingdialog_component_1_1;
@@ -37,16 +37,19 @@ System.register(['angular2/core', './category.service', './categorycreate.compon
                     this.loadingDialog.show();
                 };
                 CategoryListComponent.prototype.create = function () {
-                    this.categoryCreate.init();
+                    this.categoryModal.initCreateMode();
+                };
+                CategoryListComponent.prototype.edit = function (id) {
+                    this.categoryModal.initEditMode(id);
                 };
                 CategoryListComponent.prototype.loadTraceList = function (data) {
                     this.categoryList = data;
                     this.loadingDialog.hide();
                 };
                 __decorate([
-                    core_1.ViewChild(categorycreate_component_1.CategoryCreateComponent), 
-                    __metadata('design:type', categorycreate_component_1.CategoryCreateComponent)
-                ], CategoryListComponent.prototype, "categoryCreate", void 0);
+                    core_1.ViewChild(categorymodal_component_1.CategoryModalComponent), 
+                    __metadata('design:type', categorymodal_component_1.CategoryModalComponent)
+                ], CategoryListComponent.prototype, "categoryModal", void 0);
                 __decorate([
                     core_1.ViewChild(loadingdialog_component_1.LoadingDialogComponent), 
                     __metadata('design:type', loadingdialog_component_1.LoadingDialogComponent)
@@ -56,7 +59,7 @@ System.register(['angular2/core', './category.service', './categorycreate.compon
                         selector: 'categorylist',
                         templateUrl: './pages/category/categorylist.html',
                         providers: [category_service_1.CategoryService],
-                        directives: [categorycreate_component_1.CategoryCreateComponent, loadingdialog_component_1.LoadingDialogComponent]
+                        directives: [categorymodal_component_1.CategoryModalComponent, loadingdialog_component_1.LoadingDialogComponent]
                     }), 
                     __metadata('design:paramtypes', [category_service_1.CategoryService])
                 ], CategoryListComponent);

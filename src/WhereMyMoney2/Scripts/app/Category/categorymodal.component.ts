@@ -1,4 +1,4 @@
-﻿import {Component, ElementRef, Inject, ViewChild } from 'angular2/core';
+﻿import {Component, ElementRef, Inject, ViewChild, Input } from 'angular2/core';
 import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {CategoryService} from './category.service';
 import {Category} from './category';
@@ -7,14 +7,15 @@ import {LoadingDialogComponent} from '../Commons/loadingdialog.component';
 declare var $: any;
 
 @Component({
-    selector: 'categorycreate',
-    templateUrl: './pages/category/categorycreate.html',
+    selector: 'categorymodal',
+    templateUrl: './pages/category/categorymodal.html',
     providers: [CategoryService],
     directives: [LoadingDialogComponent]
 })
 
-export class CategoryCreateComponent {
+export class CategoryModalComponent {
     @ViewChild(LoadingDialogComponent) loadingDialog: LoadingDialogComponent;
+    @Input() categoryList;
     public formTitle: string;
     public category: Category;
 
@@ -24,7 +25,6 @@ export class CategoryCreateComponent {
     public validForm: boolean;
 
     constructor(private categoryService: CategoryService, @Inject(ElementRef) private elementRef: ElementRef, private builder: FormBuilder) {
-        this.formTitle = 'Create new Category...';
         this.category = new Category();
 
         //Initialize Control and Control Group objects for Form Validation
@@ -34,13 +34,38 @@ export class CategoryCreateComponent {
         });
     }   
 
-    init() {
-        this.category.categoryName = null;
-        this.category.description = '';
+    initCreateMode() {
+        this.formTitle = 'Create new Category...';
+
+        this.category.Id = 0;
+        this.category.CategoryName = null;
+        this.category.Description = '';
 
         //Workaround for reset validation after clicking on "Create New" button
         this.validForm = true;
         this.categoryNameInput.updateValue(null);
+    }
+
+    initEditMode(id : number) {
+        this.formTitle = 'Edit Category...';
+        this.loadingDialog.show();
+
+        this.categoryService.getCategoryById(id).subscribe(data => this.bindAfterGet(data), err => console.log(err));
+    }
+
+    bindAfterGet(data) {
+        let bindItem: Category;
+        bindItem = JSON.parse(JSON.stringify(data));
+
+        this.category.Id = bindItem.Id;
+        this.category.CategoryName = bindItem.CategoryName;
+        this.category.Description = bindItem.Description;
+
+        //Workaround for reset validation after clicking on "Update" button
+        this.validForm = true;
+        this.categoryNameInput.updateValue(this.category.CategoryName);
+
+        this.loadingDialog.hide();
     }
 
     save() {
@@ -57,12 +82,16 @@ export class CategoryCreateComponent {
 
         if (this.validForm) {
             this.loadingDialog.show();
-            this.categoryService.createNewCategory(this.category).subscribe(data => this.refresh(data), err => console.log(err));
+            this.categoryService.saveCategory(this.category).subscribe(data => this.refreshAfterSave(data), err => console.log(err));
         }
     }
 
-    refresh(data) {
-        $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
+    refreshAfterSave(data) {
+        $(this.elementRef.nativeElement).find('#categorymodal').modal('toggle');
+
+        alert(JSON.stringify(this.categoryList));
+
+        //this.categoryList.
         this.loadingDialog.hide();
     }
 }

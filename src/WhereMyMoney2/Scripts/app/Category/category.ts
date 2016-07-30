@@ -1,15 +1,15 @@
 ﻿export class Category {
-    public id: number;
-    public categoryName: string;
-    public description: string;
-    public isActive: boolean;
-    public userId: number;
+    public Id: number;
+    public CategoryName: string;
+    public Description: string;
+    public IsActive: boolean;
+    public UserId: number;
 
     constructor() {
-        this.id = 0;
-        this.categoryName = "";
-        this.description = "";
-        this.isActive = true;
-        this.userId = 0;
+        this.Id = 0;
+        this.CategoryName = "";
+        this.Description = "";
+        this.IsActive = true;
+        this.UserId = 0;
     }
 }

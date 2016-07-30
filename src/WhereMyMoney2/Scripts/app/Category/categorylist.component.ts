@@ -1,17 +1,17 @@
 ﻿import {Component, ViewChild, AfterViewInit} from 'angular2/core';
 import {CategoryService} from './category.service';
-import {CategoryCreateComponent} from './categorycreate.component';
+import {CategoryModalComponent} from './categorymodal.component';
 import {LoadingDialogComponent} from '../Commons/loadingdialog.component';
 
 @Component({
     selector: 'categorylist',
     templateUrl: './pages/category/categorylist.html',
     providers: [CategoryService],
-    directives: [CategoryCreateComponent, LoadingDialogComponent]
+    directives: [CategoryModalComponent, LoadingDialogComponent]
 })
 
 export class CategoryListComponent implements AfterViewInit {
-    @ViewChild(CategoryCreateComponent) categoryCreate: CategoryCreateComponent;
+    @ViewChild(CategoryModalComponent) categoryModal: CategoryModalComponent;
     @ViewChild(LoadingDialogComponent) loadingDialog: LoadingDialogComponent;
     categoryList;
 
@@ -25,8 +25,11 @@ export class CategoryListComponent implements AfterViewInit {
     }
 
     create() {
-        this.categoryCreate.init();
-        
+        this.categoryModal.initCreateMode();
+    }
+
+    edit(id : number) {
+        this.categoryModal.initEditMode(id);
     }
 
     loadTraceList(data) {

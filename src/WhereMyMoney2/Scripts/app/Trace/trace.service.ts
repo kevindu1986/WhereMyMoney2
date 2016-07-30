@@ -10,4 +10,8 @@ export class TraceService {
     getTraceList() {
         return this.http.get('http://localhost:2001/Trace/Get').map(res => res.json());
     }
+
+    getTraceById(id: number) {
+
+    }
 }

@@ -35,11 +35,19 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                 CategoryService.prototype.getCategoryList = function () {
                     return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller).map(function (res) { return res.json(); });
                 };
-                CategoryService.prototype.createNewCategory = function (category) {
+                CategoryService.prototype.getCategoryById = function (id) {
+                    return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller + '/' + id.toString()).map(function (res) { return res.json(); });
+                };
+                CategoryService.prototype.saveCategory = function (category) {
                     var body = JSON.stringify(category);
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
-                    return this.http.post(this.globalHost + '/' + this.route + '/' + this.controller, body, { headers: headers }).map(function (res) { return res.json(); });
+                    if (category.Id > 0) {
+                        return this.http.put(this.globalHost + '/' + this.route + '/' + this.controller + '/' + category.Id.toString(), body, { headers: headers }).map(function (res) { return res.json(); });
+                    }
+                    else {
+                        return this.http.post(this.globalHost + '/' + this.route + '/' + this.controller, body, { headers: headers }).map(function (res) { return res.json(); });
+                    }
                 };
                 CategoryService = __decorate([
                     core_1.Injectable(),

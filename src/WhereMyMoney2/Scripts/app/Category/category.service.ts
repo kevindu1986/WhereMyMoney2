@@ -15,11 +15,20 @@ export class CategoryService {
         return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller).map(res => res.json());
     }
 
-    createNewCategory(category: Category) {
+    getCategoryById(id: number) {
+        return this.http.get(this.globalHost + '/' + this.route + '/' + this.controller + '/' + id.toString()).map(res => res.json());
+    }
+
+    saveCategory(category: Category) {
         let body = JSON.stringify(category);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json')
 
-        return this.http.post(this.globalHost + '/' + this.route + '/' + this.controller, body, { headers: headers }).map(res => res.json());
+        if (category.Id > 0) {
+            return this.http.put(this.globalHost + '/' + this.route + '/' + this.controller + '/' + category.Id.toString(), body, { headers: headers }).map(res => res.json());
+        }
+        else {
+            return this.http.post(this.globalHost + '/' + this.route + '/' + this.controller, body, { headers: headers }).map(res => res.json());
+        }
     }
 }

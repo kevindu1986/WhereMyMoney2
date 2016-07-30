@@ -1,5 +1,5 @@
 ﻿<!-- Modal -->
-<div class="modal fade" id="categorycreate" role="dialog">
+<div class="modal fade" id="categorymodal" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +11,7 @@
                     <div class="form-group" [ngClass]="{ 'has-error': !validForm }">
                         <label class="col-lg-3 control-label">Category Name</label>
                         <div class="col-lg-9">
-                            <input type="text" [(ngModel)]="category.categoryName" ngControl="categoryNameInput" class="form-control" placeholder="Enter Category Name..." />
+                            <input type="text" [(ngModel)]="category.CategoryName" ngControl="categoryNameInput" class="form-control" placeholder="Enter Category Name..." />
                             <control-messages [control]="categoryForm.controls.categoryNameInput"></control-messages>
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Description</label>
                         <div class="col-lg-9">
-                            <textarea [(ngModel)]="category.description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
+                            <textarea [(ngModel)]="category.Description" class="form-control" rows="3" placeholder="Enter Description..."></textarea>
                         </div>
                     </div>
                 </form>

@@ -7,11 +7,11 @@ System.register([], function(exports_1, context_1) {
         execute: function() {
             Category = (function () {
                 function Category() {
-                    this.id = 0;
-                    this.categoryName = "";
-                    this.description = "";
-                    this.isActive = true;
-                    this.userId = 0;
+                    this.Id = 0;
+                    this.CategoryName = "";
+                    this.Description = "";
+                    this.IsActive = true;
+                    this.UserId = 0;
                 }
                 return Category;
             }());

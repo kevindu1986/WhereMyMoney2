@@ -14,7 +14,7 @@ System.register(['angular2/core', 'angular2/common', './category.service', './ca
         return function (target, key) { decorator(target, key, paramIndex); }
     };
     var core_1, common_1, category_service_1, category_1, loadingdialog_component_1;
-    var CategoryCreateComponent;
+    var CategoryModalComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -33,12 +33,11 @@ System.register(['angular2/core', 'angular2/common', './category.service', './ca
                 loadingdialog_component_1 = loadingdialog_component_1_1;
             }],
         execute: function() {
-            CategoryCreateComponent = (function () {
-                function CategoryCreateComponent(categoryService, elementRef, builder) {
+            CategoryModalComponent = (function () {
+                function CategoryModalComponent(categoryService, elementRef, builder) {
                     this.categoryService = categoryService;
                     this.elementRef = elementRef;
                     this.builder = builder;
-                    this.formTitle = 'Create new Category...';
                     this.category = new category_1.Category();
                     //Initialize Control and Control Group objects for Form Validation
                     this.categoryNameInput = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required]));
@@ -46,14 +45,33 @@ System.register(['angular2/core', 'angular2/common', './category.service', './ca
                         categoryNameInput: this.categoryNameInput
                     });
                 }
-                CategoryCreateComponent.prototype.init = function () {
-                    this.category.categoryName = null;
-                    this.category.description = '';
+                CategoryModalComponent.prototype.initCreateMode = function () {
+                    this.formTitle = 'Create new Category...';
+                    this.category.Id = 0;
+                    this.category.CategoryName = null;
+                    this.category.Description = '';
                     //Workaround for reset validation after clicking on "Create New" button
                     this.validForm = true;
                     this.categoryNameInput.updateValue(null);
                 };
-                CategoryCreateComponent.prototype.save = function () {
+                CategoryModalComponent.prototype.initEditMode = function (id) {
+                    var _this = this;
+                    this.formTitle = 'Edit Category...';
+                    this.loadingDialog.show();
+                    this.categoryService.getCategoryById(id).subscribe(function (data) { return _this.bindAfterGet(data); }, function (err) { return console.log(err); });
+                };
+                CategoryModalComponent.prototype.bindAfterGet = function (data) {
+                    var bindItem;
+                    bindItem = JSON.parse(JSON.stringify(data));
+                    this.category.Id = bindItem.Id;
+                    this.category.CategoryName = bindItem.CategoryName;
+                    this.category.Description = bindItem.Description;
+                    //Workaround for reset validation after clicking on "Update" button
+                    this.validForm = true;
+                    this.categoryNameInput.updateValue(this.category.CategoryName);
+                    this.loadingDialog.hide();
+                };
+                CategoryModalComponent.prototype.save = function () {
                     var _this = this;
                     //Workaround for reset validation after clicking on "Create New" button
                     //When clicking on Create new button and not assign any value to inputs yet, click "Save" and it will perform the validation.
@@ -67,31 +85,37 @@ System.register(['angular2/core', 'angular2/common', './category.service', './ca
                     }
                     if (this.validForm) {
                         this.loadingDialog.show();
-                        this.categoryService.createNewCategory(this.category).subscribe(function (data) { return _this.refresh(data); }, function (err) { return console.log(err); });
+                        this.categoryService.saveCategory(this.category).subscribe(function (data) { return _this.refreshAfterSave(data); }, function (err) { return console.log(err); });
                     }
                 };
-                CategoryCreateComponent.prototype.refresh = function (data) {
-                    $(this.elementRef.nativeElement).find('#categorycreate').modal('toggle');
+                CategoryModalComponent.prototype.refreshAfterSave = function (data) {
+                    $(this.elementRef.nativeElement).find('#categorymodal').modal('toggle');
+                    alert(JSON.stringify(this.categoryList));
+                    this.categoryList.join(data);
                     this.loadingDialog.hide();
                 };
                 __decorate([
                     core_1.ViewChild(loadingdialog_component_1.LoadingDialogComponent), 
                     __metadata('design:type', loadingdialog_component_1.LoadingDialogComponent)
-                ], CategoryCreateComponent.prototype, "loadingDialog", void 0);
-                CategoryCreateComponent = __decorate([
+                ], CategoryModalComponent.prototype, "loadingDialog", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], CategoryModalComponent.prototype, "categoryList", void 0);
+                CategoryModalComponent = __decorate([
                     core_1.Component({
-                        selector: 'categorycreate',
-                        templateUrl: './pages/category/categorycreate.html',
+                        selector: 'categorymodal',
+                        templateUrl: './pages/category/categorymodal.html',
                         providers: [category_service_1.CategoryService],
                         directives: [loadingdialog_component_1.LoadingDialogComponent]
                     }),
                     __param(1, core_1.Inject(core_1.ElementRef)), 
                     __metadata('design:paramtypes', [category_service_1.CategoryService, core_1.ElementRef, common_1.FormBuilder])
-                ], CategoryCreateComponent);
-                return CategoryCreateComponent;
+                ], CategoryModalComponent);
+                return CategoryModalComponent;
             }());
-            exports_1("CategoryCreateComponent", CategoryCreateComponent);
+            exports_1("CategoryModalComponent", CategoryModalComponent);
         }
     }
 });
-//# sourceMappingURL=categorycreate.component.js.map
+//# sourceMappingURL=categorymodal.component.js.map
